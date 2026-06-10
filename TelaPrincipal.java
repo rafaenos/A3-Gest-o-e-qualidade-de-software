@@ -67,12 +67,15 @@ public class TelaPrincipal extends JFrame {
 
         JButton btnRelatorio =
                 new JButton("Gerar Relatório");
+        JButton btnMetricas =
+                new JButton("📈 Métricas");
 
         painelBotoes.add(btnCadastrar);
         painelBotoes.add(btnGeracao);
         painelBotoes.add(btnConsumo);
         painelBotoes.add(btnTransferir);
         painelBotoes.add(btnRelatorio);
+        painelBotoes.add(btnMetricas);
 
         add(painelBotoes, BorderLayout.SOUTH);
 
@@ -249,5 +252,10 @@ btnCadastrar.addActionListener(e -> {
             areaTexto.setText(
                     sistema.gerarRelatorio());
         });
+        btnMetricas.addActionListener(e -> {
+
+    areaTexto.setText(
+            sistema.gerarMetricas());
+});
     }
 }

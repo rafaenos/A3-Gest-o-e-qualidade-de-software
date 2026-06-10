@@ -5,6 +5,8 @@ public class SistemaEnergia {
 
     private List<Usuario> usuarios;
     private List<Transacao> transacoes;
+    private int totalTransferencias = 0;
+    private double energiaTotalGerada = 0;
 
     public SistemaEnergia() {
         usuarios = new ArrayList<>();
@@ -48,6 +50,7 @@ public class SistemaEnergia {
 
         if (usuario != null && quantidade > 0) {
             usuario.registrarGeracao(quantidade);
+            energiaTotalGerada += quantidade;
         }
     }
 
@@ -84,6 +87,8 @@ public class SistemaEnergia {
 
         remetente.removerCreditos(quantidade);
         destinatario.adicionarCreditos(quantidade);
+        
+        totalTransferencias++;
 
         Transacao transacao =
                 new Transacao(remetente, destinatario, quantidade);
@@ -123,4 +128,24 @@ public class SistemaEnergia {
 
         return relatorio.toString();
     }
+    public String gerarMetricas() {
+
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("===== MÉTRICAS DO SISTEMA =====\n\n");
+
+    sb.append("Usuários cadastrados: ")
+      .append(usuarios.size())
+      .append("\n");
+
+    sb.append("Energia total gerada: ")
+      .append(energiaTotalGerada)
+      .append(" kWh\n");
+
+    sb.append("Transferências realizadas: ")
+      .append(totalTransferencias)
+      .append("\n");
+
+    return sb.toString();
+}
 }
